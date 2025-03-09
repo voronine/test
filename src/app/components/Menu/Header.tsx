@@ -4,8 +4,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import { usePathname } from 'next/navigation';
 import MenuItemComponent from './MenuItem';
+import { Inter } from 'next/font/google';
 import styles from './Header.module.css';
+
+const inter = Inter({ subsets: ['latin'], weight: ['400', '700'] });
 
 export interface MenuItem {
   label: string;
@@ -42,18 +46,24 @@ const menuConfig: MenuItem[] = [
   { label: 'Blog', href: '/blog' },
   { label: 'Shop', href: '/shop' },
   { label: 'About', href: '/about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Contact', href: '/contact' }, 
 ];
 
 const Header: React.FC = () => {
+  const pathname = usePathname();
+
   return (
     <header className={styles.header}>
-      <div className={styles.logo}>Logo Here</div>
+      <div className={`${styles.logo} ${inter.className}`}>Logo Here</div>
       <div className={styles.rightSection}>
         <nav className={styles.nav}>
           <ul className={styles.menuList}>
             {menuConfig.map((item, index) => (
-              <MenuItemComponent key={index} item={item} />
+              <MenuItemComponent 
+                key={index} 
+                item={item} 
+                isActive={item.href === pathname} 
+              />
             ))}
           </ul>
         </nav>

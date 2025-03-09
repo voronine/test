@@ -33,9 +33,10 @@ const SubMenuButton = styled(Button)<ButtonProps>(() => ({
 
 interface MenuItemComponentProps {
   item: MenuItem;
+  isActive?: boolean;
 }
 
-const MenuItemComponent: React.FC<MenuItemComponentProps> = ({ item }) => {
+const MenuItemComponent: React.FC<MenuItemComponentProps> = ({ item, isActive }) => {
   const [isOpen, setIsOpen] = useState(false);
   const hasSubmenu = !!item.submenu && item.submenu.length > 0;
 
@@ -49,7 +50,11 @@ const MenuItemComponent: React.FC<MenuItemComponentProps> = ({ item }) => {
 
   return (
     <li className={styles.menuItem}>
-      <CustomButton onClick={handleClick} className={styles.menuButton} {...buttonProps}>
+      <CustomButton 
+        onClick={handleClick} 
+        className={`${styles.menuButton} ${isActive ? styles.activeMenuButton : ''}`}
+        {...buttonProps}
+      >
         {item.label}
         {hasSubmenu && (
           <KeyboardArrowDownIcon
