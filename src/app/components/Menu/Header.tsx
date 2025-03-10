@@ -69,17 +69,17 @@ const Header: React.FC = () => {
         </nav>
         <div className={styles.iconButtons}>
           <CustomIconButton component={Link} href="/cart">
-            <Image 
-              src="/icons/cart.svg" 
-              alt="Cart" 
+          <Image 
+              src="/icons/user.svg" 
+              alt="User" 
               width={24} 
               height={24} 
             />
           </CustomIconButton>
           <CustomIconButton component={Link} href="/cabinet">
-            <Image 
-              src="/icons/user.svg" 
-              alt="User" 
+             <Image 
+              src="/icons/cart.svg" 
+              alt="Cart" 
               width={24} 
               height={24} 
             />
