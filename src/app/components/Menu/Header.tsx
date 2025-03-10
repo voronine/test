@@ -35,54 +35,60 @@ const CustomIconButton = styled(Button)<{ component?: React.ElementType }>(({ th
 
 const menuConfig: MenuItem[] = [
   { label: 'Home', href: '/' },
-  { 
-    label: 'Features', 
+  {
+    label: 'Features',
     submenu: [
       { label: 'Analytics', href: '/features/analytics' },
       { label: 'Integration', href: '/features/integration' },
       { label: 'Customization', href: '/features/customization' },
-    ]
+    ],
   },
   { label: 'Blog', href: '/blog' },
   { label: 'Shop', href: '/shop' },
   { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' }, 
+  { label: 'Contact', href: '/contact' },
 ];
 
 const Header: React.FC = () => {
   const pathname = usePathname();
+  const [burgerActive, setBurgerActive] = React.useState(false);
+  const toggleBurger = () => setBurgerActive((prev) => !prev);
+
+  React.useEffect(() => {
+    if (burgerActive) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [burgerActive]);
 
   return (
     <header className={styles.header}>
       <div className={`${styles.logo} ${inter.className}`}>Logo Here</div>
-      <div className={styles.rightSection}>
+      <span
+        className={`${styles.header__burger} ${burgerActive ? styles.active : ''}`}
+        onClick={toggleBurger}
+      >
+        <span></span>
+      </span>
+      <div className={`${styles.rightSection} ${burgerActive ? styles.active : ''}`}>
         <nav className={styles.nav}>
           <ul className={styles.menuList}>
             {menuConfig.map((item, index) => (
-              <MenuItemComponent 
-                key={index} 
-                item={item} 
-                isActive={item.href === pathname} 
+              <MenuItemComponent
+                key={index}
+                item={item}
+                isActive={item.href === pathname}
               />
             ))}
           </ul>
         </nav>
         <div className={styles.iconButtons}>
           <CustomIconButton component={Link} href="/cart">
-          <Image 
-              src="/icons/user.svg" 
-              alt="User" 
-              width={24} 
-              height={24} 
-            />
+            <Image src="/icons/user.svg" alt="User" width={24} height={24} />
           </CustomIconButton>
           <CustomIconButton component={Link} href="/cabinet">
-             <Image 
-              src="/icons/cart.svg" 
-              alt="Cart" 
-              width={24} 
-              height={24} 
-            />
+            <Image src="/icons/cart.svg" alt="Cart" width={24} height={24} />
           </CustomIconButton>
         </div>
       </div>
