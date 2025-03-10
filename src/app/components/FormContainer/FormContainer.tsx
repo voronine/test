@@ -2,12 +2,6 @@
 import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import styles from './FormContainer.module.css';
-import PhoneIcon from '@mui/icons-material/Phone';
-import EmailIcon from '@mui/icons-material/Email';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { initialValues, validationSchema, subjectOptions } from './formConfig';
 
 const contactConfig = {
@@ -32,15 +26,15 @@ const contactConfig = {
   ],
   socialLinks: [
     {
-      label: 'Facebook',
-      url: '#'
-    },
-    {
       label: 'Twitter',
       url: '#'
     },
     {
-      label: 'LinkedIn',
+      label: 'Instagram',
+      url: '#'
+    },
+    {
+      label: 'Discord',
       url: '#'
     }
   ]
@@ -64,22 +58,19 @@ const FormContainer: React.FC = () => {
             <li key={index}>
               {item.type === 'phone' && (
                 <>
-                  <PhoneIcon className={styles.icon} />
-
+                  <img src="/icons/phone.svg" className={styles.icon} alt="Phone Icon" />
                   <span>{item.value}</span>
                 </>
               )}
               {item.type === 'email' && (
                 <>
-                  <EmailIcon className={styles.icon} />
-
+                  <img src="/icons/email.svg" className={styles.icon} alt="Email Icon" />
                   <span>{item.value}</span>
                 </>
               )}
               {item.type === 'address' && (
                 <>
-                  <LocationOnIcon className={styles.icon} />
-
+                  <img src="/icons/location.svg" className={styles.icon} alt="Location Icon" />
                   <span>
                     {item.value[0]}
                     <br />
@@ -92,10 +83,16 @@ const FormContainer: React.FC = () => {
         </ul>
         <div className={styles.socialIcons}>
           {contactConfig.socialLinks.map((link, index) => (
-            <a key={index} href={link.url} aria-label={link.label}>
-              {link.label === 'Facebook' && <FacebookIcon />}
-              {link.label === 'Twitter' && <TwitterIcon />}
-              {link.label === 'LinkedIn' && <LinkedInIcon />}
+            <a
+              key={index}
+              href={link.url}
+              aria-label={link.label}
+              className={styles.socialIcon}
+            >
+              <img
+                src={`/icons/${link.label.toLowerCase()}.svg`}
+                alt={`${link.label} icon`}
+              />
             </a>
           ))}
         </div>
@@ -112,7 +109,7 @@ const FormContainer: React.FC = () => {
                 <div className={styles.inputWrapper}>
                   <label htmlFor="firstName">First Name</label>
 
-                  <Field id="firstName" name="firstName" placeholder="First Name" type="text" />
+                  <Field id="firstName" name="firstName" placeholder="" type="text" />
 
                   <ErrorMessage name="firstName" component="div" className={styles.error} />
                 </div>
@@ -120,7 +117,7 @@ const FormContainer: React.FC = () => {
                 <div className={styles.inputWrapper}>
                   <label htmlFor="lastName">Last Name</label>
 
-                  <Field id="lastName" name="lastName" placeholder="Last Name" type="text" />
+                  <Field id="lastName" name="lastName" placeholder="" type="text" />
 
                   <ErrorMessage name="lastName" component="div" className={styles.error} />
                 </div>
@@ -130,7 +127,7 @@ const FormContainer: React.FC = () => {
                 <div className={styles.inputWrapper}>
                   <label htmlFor="email">Email</label>
 
-                  <Field id="email" name="email" placeholder="Email" type="email" />
+                  <Field id="email" name="email" placeholder="" type="email" />
 
                   <ErrorMessage name="email" component="div" className={styles.error} />
                 </div>
@@ -139,15 +136,14 @@ const FormContainer: React.FC = () => {
                   <div className={styles.phoneWrapper}>
                     <label htmlFor="phone">Phone Number</label>
 
-                    <Field id="phone" name="phone" placeholder="+1 012 3456 789" type="tel" />
-
-                    <PhoneIcon className={styles.phoneIcon} />
+                    <Field id="phone" name="phone" placeholder="" type="tel" />
 
                     <ErrorMessage name="phone" component="div" className={styles.error} />
                   </div>
 
                 </div>
               </div>
+
               <div className={styles.inputWrapper}>
                 <label>Select Subject?</label>
 
@@ -180,6 +176,13 @@ const FormContainer: React.FC = () => {
               <button type="submit" disabled={isSubmitting}>
                 Send Message
               </button>
+
+              <img
+                src="/icons/paper.svg"
+                alt="Decoration"
+                className={styles.decorationImage}
+/>
+
             </Form>
           )}
         </Formik>
