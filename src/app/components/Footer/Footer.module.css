@@ -131,4 +131,23 @@
     text-decoration: underline;
     cursor: pointer;
   }
+
+  @media screen and (max-width: 1450px) {
+    .footer {
+      padding: 40px;
+    }
+
+    .content {
+      flex-wrap: wrap;
+    }
+    
+    .column {
+      flex: 1 1 calc(50% - 10px);
+    }
+    .newsletter {
+      flex: 1 1 100%;
+      margin-top: 20px; 
+    }
+  }
+  
   

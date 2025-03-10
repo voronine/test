@@ -244,3 +244,34 @@ textarea:-webkit-autofill {
   bottom: -40px;
   right: 140px;
 }
+
+@media (max-width: 1243px) {
+  .rightSide {
+    padding-left: 450px;
+  }
+}
+
+
+@media (max-width: 1226) {
+  .footerContact {
+    padding-right: 60px;
+  }
+
+  .radioGroup {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    justify-items: start;
+    align-items: center;
+  }
+
+  .radioGroup label {
+    position: static !important;
+    top: auto !important;
+    margin: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+  }
+}
