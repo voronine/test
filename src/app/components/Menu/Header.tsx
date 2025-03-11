@@ -18,7 +18,7 @@ export interface MenuItem {
   submenu?: MenuItem[];
 }
 
-const CustomIconButton = styled(Button)<{ component?: React.ElementType }>(({ theme }) => ({
+const CustomIconButton = styled(Button)<{ component?: React.ElementType }>(() => ({
   minWidth: 'unset',
   padding: 0,
   borderRadius: '50%',

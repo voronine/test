@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, Form, ErrorMessage, FormikHelpers } from 'formik';
 import styles from './FormContainer.module.css';
 import { initialValues, validationSchema, subjectOptions } from './formConfig';
 
@@ -41,7 +41,7 @@ const contactConfig = {
 };
 
 const FormContainer: React.FC = () => {
-  const handleSubmit = (values: typeof initialValues, actions: any) => {
+  const handleSubmit = (values: typeof initialValues, actions: FormikHelpers<typeof initialValues>) => {
     console.log('Submitting form', values);
     actions.setSubmitting(false);
   };
