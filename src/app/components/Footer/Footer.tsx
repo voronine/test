@@ -10,7 +10,6 @@ const Footer: React.FC = () => {
     <footer className={styles.footer}>
       <h2 className={styles.logo}>{footerConfig.logo}</h2>
       <div className={styles.divider} />
-
       <div className={styles.content}>
         {footerConfig.columns.map((col, idx) => (
           <div className={styles.column} key={idx}>
@@ -54,7 +53,6 @@ const Footer: React.FC = () => {
             </ul>
           </div>
         ))}
-
         <div className={styles.newsletter}>
           <h3>{footerConfig.newsletter.title}</h3>
           <form>
