@@ -50,32 +50,47 @@ const FormContainer: React.FC = () => {
     <footer className={styles.footerContact}>
       <div className={styles.leftSide}>
         <h2>{contactConfig.title}</h2>
-
         <p>{contactConfig.subtitle}</p>
-        
         <ul className={styles.contactList}>
           {contactConfig.contactList.map((item, index) => (
             <li key={index}>
               {item.type === 'phone' && (
                 <>
                   <img src="/icons/phone.svg" className={styles.icon} alt="Phone Icon" />
-                  <span>{item.value}</span>
+                  <a href={`tel:${item.value}`} className={styles.link}>
+                    {item.value}
+                  </a>
                 </>
               )}
               {item.type === 'email' && (
                 <>
                   <img src="/icons/email.svg" className={styles.icon} alt="Email Icon" />
-                  <span>{item.value}</span>
+                  <a href={`mailto:${item.value}`} className={styles.link}>
+                    {item.value}
+                  </a>
                 </>
               )}
               {item.type === 'address' && (
                 <>
                   <img src="/icons/location.svg" className={styles.icon} alt="Location Icon" />
-                  <span>
-                    {item.value[0]}
-                    <br />
-                    {item.value[1]}
-                  </span>
+                  <a
+                    href={`https://maps.google.com/?q=${encodeURIComponent(
+                      Array.isArray(item.value) ? item.value.join(' ') : item.value
+                    )}`}
+                    className={styles.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {Array.isArray(item.value) ? (
+                      <>
+                        {item.value[0]}
+                        <br />
+                        {item.value[1]}
+                      </>
+                    ) : (
+                      item.value
+                    )}
+                  </a>
                 </>
               )}
             </li>
@@ -108,45 +123,31 @@ const FormContainer: React.FC = () => {
               <div className={styles.inputGroup}>
                 <div className={styles.inputWrapper}>
                   <label htmlFor="firstName">First Name</label>
-
                   <Field id="firstName" name="firstName" placeholder="" type="text" />
-
                   <ErrorMessage name="firstName" component="div" className={styles.error} />
                 </div>
-
                 <div className={styles.inputWrapper}>
                   <label htmlFor="lastName">Last Name</label>
-
                   <Field id="lastName" name="lastName" placeholder="" type="text" />
-
                   <ErrorMessage name="lastName" component="div" className={styles.error} />
                 </div>
-
               </div>
               <div className={styles.inputGroup}>
                 <div className={styles.inputWrapper}>
                   <label htmlFor="email">Email</label>
-
                   <Field id="email" name="email" placeholder="" type="email" />
-
                   <ErrorMessage name="email" component="div" className={styles.error} />
                 </div>
-
                 <div className={styles.inputWrapper}>
                   <div className={styles.phoneWrapper}>
                     <label htmlFor="phone">Phone Number</label>
-
                     <Field id="phone" name="phone" placeholder="" type="tel" />
-
                     <ErrorMessage name="phone" component="div" className={styles.error} />
                   </div>
-
                 </div>
               </div>
-
               <div className={styles.inputWrapper}>
                 <label>Select Subject?</label>
-
                 <div className={styles.radioGroup}>
                   {subjectOptions.map((option) => (
                     <label key={option.value}>
@@ -155,13 +156,10 @@ const FormContainer: React.FC = () => {
                     </label>
                   ))}
                 </div>
-
                 <ErrorMessage name="subject" component="div" className={styles.error} />
               </div>
-
               <div className={styles.inputWrapper}>
                 <label htmlFor="message">Message</label>
-
                 <Field
                   as="textarea"
                   id="message"
@@ -169,20 +167,16 @@ const FormContainer: React.FC = () => {
                   placeholder="Write your message..."
                   style={{ resize: 'none' }}
                 />
-
                 <ErrorMessage name="message" component="div" className={styles.error} />
               </div>
-              
               <button type="submit" disabled={isSubmitting}>
                 Send Message
               </button>
-
               <img
                 src="/icons/paper.svg"
                 alt="Decoration"
                 className={styles.decorationImage}
-/>
-
+              />
             </Form>
           )}
         </Formik>

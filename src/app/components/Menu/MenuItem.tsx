@@ -24,7 +24,7 @@ const CustomButton = styled(Button, {
   color: isMenu ? '#fff' : '#000',
   justifyContent: !isMenu ? 'center' : 'flex-start',
   '&:hover': {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: isMenu ? 'transparent' : '#f0f0f0',
   },
 }));
 

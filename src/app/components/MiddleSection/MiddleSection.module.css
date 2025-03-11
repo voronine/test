@@ -15,4 +15,16 @@
     margin-bottom: 50px;
     color: #717171;
   }
+
+  @media (max-width: 870px) {
+    .title {
+      font-size: 24;
+      margin-top: 14px;
+      margin-bottom: 175px;
+    }
+
+    .middleSection p {
+      display: none;
+    }
+  }
   
