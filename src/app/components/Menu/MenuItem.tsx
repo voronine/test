@@ -13,30 +13,42 @@ const LinkBehavior = React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref)
 });
 LinkBehavior.displayName = 'LinkBehavior';
 
-const CustomButton = styled(Button)<ButtonProps>(() => ({
+interface CustomButtonProps extends ButtonProps {
+  isMenu?: boolean;
+}
+
+const CustomButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== 'isMenu',
+})<CustomButtonProps>(({ isMenu }) => ({
   textTransform: 'none',
-  color: '#000',
+  color: isMenu ? '#fff' : '#000',
+  justifyContent: !isMenu ? 'center' : 'flex-start',
   '&:hover': {
     backgroundColor: '#f0f0f0',
   },
 }));
 
-const SubMenuButton = styled(Button)<ButtonProps>(() => ({
+const SubMenuButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== 'isMenu',
+})<CustomButtonProps>(({ isMenu }) => ({
   textTransform: 'none',
-  color: '#000',
+  color: isMenu ? '#fff' : '#000',
+  backgroundColor: '#333',
   justifyContent: 'flex-start',
+  alignItems: 'flex-start',
   borderRadius: 0,
   '&:hover': {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#444',
   },
 }));
 
 interface MenuItemComponentProps {
   item: MenuItem;
   isActive?: boolean;
+  isMenu?: boolean;
 }
 
-const MenuItemComponent: React.FC<MenuItemComponentProps> = ({ item, isActive }) => {
+const MenuItemComponent: React.FC<MenuItemComponentProps> = ({ item, isActive, isMenu }) => {
   const [isOpen, setIsOpen] = useState(false);
   const hasSubmenu = !!item.submenu && item.submenu.length > 0;
 
@@ -52,6 +64,7 @@ const MenuItemComponent: React.FC<MenuItemComponentProps> = ({ item, isActive })
     <li className={styles.menuItem}>
       <CustomButton 
         onClick={handleClick} 
+        isMenu={isMenu}
         className={`${styles.menuButton} ${isActive ? styles.activeMenuButton : ''}`}
         {...buttonProps}
       >
@@ -62,7 +75,7 @@ const MenuItemComponent: React.FC<MenuItemComponentProps> = ({ item, isActive })
               transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
               transition: 'transform 0.3s ease',
               fontSize: 16,
-              marginLeft: 8
+              marginLeft: 8,
             }}
           />
         )}
@@ -73,7 +86,7 @@ const MenuItemComponent: React.FC<MenuItemComponentProps> = ({ item, isActive })
             const subButtonProps: ButtonProps = subItem.href ? { component: LinkBehavior, href: subItem.href } : {};
             return (
               <li key={idx} className={styles.dropdownItem}>
-                <SubMenuButton className={styles.submenuButton} {...subButtonProps}>
+                <SubMenuButton isMenu={isMenu} className={styles.submenuButton} {...subButtonProps}>
                   {subItem.label}
                 </SubMenuButton>
               </li>

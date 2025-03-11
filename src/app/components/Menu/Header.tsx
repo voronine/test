@@ -38,9 +38,9 @@ const menuConfig: MenuItem[] = [
   {
     label: 'Features',
     submenu: [
-      { label: 'Analytics', href: '/features/analytics' },
-      { label: 'Integration', href: '/features/integration' },
-      { label: 'Customization', href: '/features/customization' },
+      { label: 'Analytics', href: '/#' },
+      { label: 'Integration', href: '/#' },
+      { label: 'Customization', href: '/#' },
     ],
   },
   { label: 'Blog', href: '/blog' },
@@ -64,7 +64,7 @@ const Header: React.FC = () => {
 
   return (
     <header className={styles.header}>
-      <div className={`${styles.logo} ${inter.className}`}>Logo Here</div>
+      <div  className={`${styles.logo} ${inter.className} ${burgerActive ? styles.whiteLogo : ''}`}>Logo Here</div>
       <span
         className={`${styles.header__burger} ${burgerActive ? styles.active : ''}`}
         onClick={toggleBurger}
@@ -79,16 +79,27 @@ const Header: React.FC = () => {
                 key={index}
                 item={item}
                 isActive={item.href === pathname}
+                isMenu={burgerActive}
               />
             ))}
           </ul>
         </nav>
         <div className={styles.iconButtons}>
           <CustomIconButton component={Link} href="/cart">
-            <Image src="/icons/user.svg" alt="User" width={24} height={24} />
+            <Image
+              src={burgerActive ? "/icons/white_user.svg" : "/icons/user.svg"}
+              alt="User"
+              width={24}
+              height={24}
+            />
           </CustomIconButton>
           <CustomIconButton component={Link} href="/cabinet">
-            <Image src="/icons/cart.svg" alt="Cart" width={24} height={24} />
+            <Image
+              src={burgerActive ? "/icons/white_cart.svg" : "/icons/cart.svg"}
+              alt="Cart"
+              width={24}
+              height={24}
+            />
           </CustomIconButton>
         </div>
       </div>
