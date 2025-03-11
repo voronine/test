@@ -114,7 +114,7 @@
   text-decoration: underline;
   cursor: pointer;
 }
-@media screen and (max-width: 1450px) {
+@media screen and (max-width: 1250px) {
   .footer {
     padding: 40px;
   }
@@ -145,5 +145,9 @@
 
   .content > .column:nth-child(5) {
     align-items: center;
+  }
+
+  .newsletter {
+    margin: 0;
   }
 }

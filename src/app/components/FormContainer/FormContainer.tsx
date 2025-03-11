@@ -150,8 +150,9 @@ const FormContainer: React.FC = () => {
                 <label>Select Subject?</label>
                 <div className={styles.radioGroup}>
                   {subjectOptions.map((option) => (
-                    <label key={option.value}>
+                    <label key={option.value} className={styles.customRadio}>
                       <Field type="radio" name="subject" value={option.value} />
+                      <span className={styles.customRadioBtn}></span>
                       {option.label}
                     </label>
                   ))}

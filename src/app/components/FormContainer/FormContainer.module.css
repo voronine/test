@@ -162,6 +162,46 @@
   transition: color 0.3s ease;
 }
 
+.customRadio {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.customRadio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 0;
+  height: 0;
+}
+
+.customRadioBtn {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background-color: #ccc; 
+  border-radius: 50%;
+  margin-right: 8px;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.customRadio input:checked + .customRadioBtn {
+  background-color: #000;
+}
+
+.customRadio input:checked + .customRadioBtn::after {
+  content: "\2713"; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 10px;
+}
+
 .inputWrapper input:focus + label,
 .inputWrapper textarea:focus + label,
 .inputWrapper input:not(:placeholder-shown) + label,
@@ -319,15 +359,15 @@ textarea:-webkit-autofill {
   }
 
   .rightSide {
-    padding: 500px 20px 0 20px;
+    padding: 500px 20px 77px 20px;
   }
 
   .decorationImage {
     display: block;
-    position: relative;
+    position: absolute;
     width: 140px;
-    bottom: 15px;
-    right: 103px;
+    bottom: -17px;
+    right: 186px;
   }
 
   .contactList li {
@@ -387,5 +427,9 @@ textarea:-webkit-autofill {
 
   .form label {
     font-size: 12px;
+  }
+
+  .form button {
+    width: 100%;
   }
 }
