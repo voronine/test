@@ -24,7 +24,7 @@ const CustomButton = styled(Button, {
   color: isMenu ? '#fff' : '#000',
   justifyContent: !isMenu ? 'center' : 'flex-start',
   '&:hover': {
-    backgroundColor: isMenu ? 'transparent' : '#f0f0f0',
+    backgroundColor: !isMenu ? 'transparent' : '#f0f0f0',
   },
 }));
 
@@ -33,7 +33,7 @@ const SubMenuButton = styled(Button, {
 })<CustomButtonProps>(({ isMenu }) => ({
   textTransform: 'none',
   color: isMenu ? '#fff' : '#000',
-  backgroundColor: '#333',
+  backgroundColor: isMenu ?'#333' : 'transparent',
   justifyContent: 'flex-start',
   alignItems: 'flex-start',
   borderRadius: 0,
